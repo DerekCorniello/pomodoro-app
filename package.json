@@ -1,0 +1,15 @@
+{
+    "name": "pomodoro-app",
+    "version": "0.0.1",
+    "description": "An Electron.JS app created for cross-platform use. Made for course EECE3093C - Software Engineering",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "author": "Binary Brigade",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^30.0.3"
+    }
+}
