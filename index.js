@@ -22,12 +22,11 @@ function createMainWindow() {
 
 function switchToTimerWindow() {
     mainWindow.loadFile("views/timer.html");
+    mainWindow.webContents.executeJavaScript("startPomodoro()");
 }
 
 app.whenReady().then(() => {
-    console.log("creating mainWindow");
     createMainWindow();
-    console.log("after mainWindow creation");
     // Register 'Enter' key shortcut to switch to timer window
     globalShortcut.register("Enter", () => {
         console.log("Enter key pressed");
