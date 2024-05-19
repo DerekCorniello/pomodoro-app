@@ -4,9 +4,12 @@ let mainWindow;
 
 function createMainWindow() {
     mainWindow = new BrowserWindow({
-        // TODO Dynamic changes?
+        // TODO Dynamic changes to dims?
         width: 800,
         height: 600,
+
+        // Seems like electron thinks this is a bad practice? 
+        // We need to dial in security
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -14,7 +17,8 @@ function createMainWindow() {
     });
 
     mainWindow.loadFile("index.html");
-
+    // For debugging
+    mainWindow.webContents.openDevTools();
     // Close the window when it's closed
     mainWindow.on("closed", () => {
         app.quit();
