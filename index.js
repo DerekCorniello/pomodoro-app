@@ -1,32 +1,60 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut } = require("electron");
 
-function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  });
+let mainWindow;
 
-  win.loadFile('index.html');
+function createMainWindow() {
+    mainWindow = new BrowserWindow({
+        // TODO Dynamic changes to dims?
+        width: 800,
+        height: 600,
 
-  // Close the window when it's closed
-  win.on('closed', () => {
-    app.quit();
-  });
+        // Seems like electron thinks this is a bad practice? 
+        // We need to dial in security
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+        },
+    });
+
+    mainWindow.loadFile("index.html");
+    // For debugging
+    mainWindow.webContents.openDevTools();
+    // Close the window when it's closed
+    mainWindow.on("closed", () => {
+        app.quit();
+    });
+
 }
 
-app.whenReady().then(createWindow);
+function switchToTimerWindow() {
+    mainWindow.loadFile("views/timer.html").then(() => {
+        mainWindow.webContents.executeJavaScript("window.doPomodoro();");
+    });
+}
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+app.whenReady().then(() => {
+    createMainWindow();
+    // Register 'Enter' key shortcut to switch to timer window
+    // TODO: Create UI to handle this event
+    globalShortcut.register("Enter", () => {
+        console.log("Enter key pressed");
+        switchToTimerWindow();
+    });
 });
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+        app.quit();
+    }
+});
+
+app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createMainWindow();
+    }
+});
+
+app.on("will-quit", () => {
+    // Unregister all shortcuts
+    globalShortcut.unregisterAll();
 });
