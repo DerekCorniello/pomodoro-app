@@ -19,14 +19,18 @@ study-timer-app/
 ├── package-lock.json
 ├── index.js
 ├── index.html
+├── /built
+│ └── ...
 ├── styles/
 │ └── main.css
 ├── scripts/ 
-│ ├── timer.js
-│ └── utils.js
+│ ├── timer.ts
+│ ├── todo.ts  
+│ └── utils.ts
 ├── views/
 │ └── timer.html
 ├── assets/
+│ └── ...
 ├── tests/
 │ ├── e2e/
 │ ├── integration/
@@ -48,4 +52,6 @@ study-timer-app/
 - Test the application thoroughly to identify and fix bugs.
 - Utilize version control (e.g., Git) and collaborate with team members using platforms like GitHub.
 
+### How to build:
 
+run `npm run build`, then `npm start`.
