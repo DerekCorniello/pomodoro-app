@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+        "target": "ES5",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "./built",
+        "rootDir": "./scripts"
+  },
+  "include": [
+    "scripts/**/*",
+    "scripts/global.d.ts"
+  ]
+}
