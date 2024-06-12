@@ -27,7 +27,7 @@ class Stage {
 
 // Class for representing an entire pomodoro sequence
 // inputs a list of 8 Stage types
-class PomodoroSequence {
+export class PomodoroSequence {
     private sequence: Stage[] = [];
 
     constructor(sequence: Stage[] | null = null) {
