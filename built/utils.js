@@ -1,132 +1,102 @@
+"use strict";
 const { assert } = require('assert');
-
 class TodoList {
-    private _title: string;
-    private _items: ListItem[];
-
-    constructor(title: string, items: ListItem[]) {
+    constructor(title, items) {
         this._title = title;
         this._items = items;
     }
-
-    private deleteAt(index: number): void {
+    deleteAt(index) {
         assert(index >= 0 && index < this._items.length, "Index out of Range!");
         this._items = this._items.filter((_, i) => i !== index);
     }
-
     // Getters and setters
-    get title(): string {
+    get title() {
         return this._title;
     }
-
-    set title(value: string) {
+    set title(value) {
         this._title = value;
     }
-
-    get items(): ListItem[] {
+    get items() {
         return this._items;
     }
-
-    set items(value: ListItem[]) {
+    set items(value) {
         this._items = value;
     }
-
-    addItem(item: ListItem): void {
+    addItem(item) {
         this._items.push(item);
     }
-
-    deleteItemAtIndex(index: number): void {
+    deleteItemAtIndex(index) {
         this.deleteAt(index);
     }
-
-    deleteItemAtName(name: string): void {
+    deleteItemAtName(name) {
         this.deleteAt(this._items.findIndex(item => item.title === name));
     }
 }
-
 class ListItem {
-    private _title: string;
-    private _dueDate: Date | null;
-    private _description: string | null;
-
-    constructor(title: string, dueDate: Date | null = null, description: string | null = null) {
+    constructor(title, dueDate = null, description = null) {
         this._title = title;
         this._dueDate = dueDate;
         this._description = description;
     }
-
     // Getters and setters
-    get title(): string {
+    get title() {
         return this._title;
     }
-
-    set title(value: string) {
+    set title(value) {
         this._title = value;
     }
-
-    get dueDate(): Date | null {
+    get dueDate() {
         return this._dueDate;
     }
-
-    set dueDate(value: Date | null) {
+    set dueDate(value) {
         this._dueDate = value;
     }
-
-    get description(): string | null {
+    get description() {
         return this._description;
     }
-
-    set description(value: string | null) {
+    set description(value) {
         this._description = value;
     }
 }
-
-enum StageType {
-    WorkOne,
-    BreakOne,
-    WorkTwo,
-    BreakTwo,
-    WorkThree,
-    BreakThree,
-    WorkFour,
-    BreakFour
-};
-
+var StageType;
+(function (StageType) {
+    StageType[StageType["WorkOne"] = 0] = "WorkOne";
+    StageType[StageType["BreakOne"] = 1] = "BreakOne";
+    StageType[StageType["WorkTwo"] = 2] = "WorkTwo";
+    StageType[StageType["BreakTwo"] = 3] = "BreakTwo";
+    StageType[StageType["WorkThree"] = 4] = "WorkThree";
+    StageType[StageType["BreakThree"] = 5] = "BreakThree";
+    StageType[StageType["WorkFour"] = 6] = "WorkFour";
+    StageType[StageType["BreakFour"] = 7] = "BreakFour";
+})(StageType || (StageType = {}));
+;
 class Stage {
-    private _type: StageType;
-    private _duration: number;
-
-    constructor(type: StageType, duration: number) {
+    constructor(type, duration) {
         this._type = type;
         this._duration = duration;
     }
-
     // Getters
-    get type(): StageType {
+    get type() {
         return this._type;
     }
-
-    get duration(): number {
+    get duration() {
         return this._duration;
     }
-
-    toString(): string {
+    toString() {
         return `Stage ${StageType[this._type]}, Duration ${this._duration.toString()}`;
     }
 }
-
 class PomodoroSequence {
-    private sequence: Stage[] = [];
-
-    constructor(sequence: Stage[] | null = null) {
+    constructor(sequence = null) {
+        this.sequence = [];
         this.setSequence(sequence);
     }
-
     // Set the sequence, check to ensure it is valid as well
-    setSequence(sequence: Stage[] | null): void {
+    setSequence(sequence) {
         if (sequence && sequence.length === 8) {
             this.sequence = sequence;
-        } else {
+        }
+        else {
             // Use the default pomodoro sequence
             this.sequence = [
                 new Stage(StageType.WorkOne, 25),
@@ -140,119 +110,88 @@ class PomodoroSequence {
             ];
         }
     }
-
     // Get the sequence list
-    getSequence(): Stage[] {
+    getSequence() {
         return this.sequence;
     }
-
     // Execute the sequence
-    execute(): void {
+    execute() {
         // Create a copy of the sequence so data can be retained
         const sequence = this.getSequence().slice();
-
         // Create a recursive function that will manage the pomodoro
-        const runStage = (seq: Stage[]): void => {
+        const runStage = (seq) => {
             // Base case, if there are no more stages, end
             if (seq.length === 0) {
                 console.log("Pomodoro completed!");
                 return;
             }
-
             // Takes the first element, get a bunch of its info
-            const stage = seq.shift()!;
+            const stage = seq.shift();
             const stageType = StageType[stage.type];
-
             console.log(`Starting ${stageType} for ${stage.duration} minutes.`);
-
             setTimeout(() => {
                 console.log(`Completed ${stageType}.`);
                 runStage(seq); // Continue with the next stage
             }, stage.duration * 60000); // Convert minutes to milliseconds
         };
-
         runStage(sequence);
     }
 }
-
 class User {
-    private _username: string;
-    private _password: string;
-    private _todoList: TodoList[] | null;
-    private _history: TodoList[] | null;
-    private _customPomodoros: PomodoroSequence[] | null;
-
-    constructor(username: string, password: string, todoList: TodoList[] | null = null, history: TodoList[] | null = null, customPomodoros: PomodoroSequence[] | null = null) {
+    constructor(username, password, todoList = null, history = null, customPomodoros = null) {
         this._username = username;
         this._password = password;
         this._todoList = todoList;
         this._history = history;
         this._customPomodoros = customPomodoros;
     }
-
     // Getters and setters
-    get username(): string {
+    get username() {
         return this._username;
     }
-
-    set username(value: string) {
+    set username(value) {
         this._username = value;
     }
-
-    get password(): string {
+    get password() {
         return this._password;
     }
-
-    set password(value: string) {
+    set password(value) {
         this._password = value;
     }
-
-    get todoList(): TodoList[] | null {
+    get todoList() {
         return this._todoList;
     }
-
-    set todoList(value: TodoList[] | null) {
+    set todoList(value) {
         this._todoList = value;
     }
-
-    get history(): TodoList[] | null {
+    get history() {
         return this._history;
     }
-
-    set history(value: TodoList[] | null) {
+    set history(value) {
         this._history = value;
     }
-
-    get customPomodoros(): PomodoroSequence[] | null {
+    get customPomodoros() {
         return this._customPomodoros;
     }
-
-    set customPomodoros(value: PomodoroSequence[] | null) {
+    set customPomodoros(value) {
         this._customPomodoros = value;
     }
-
-    static login(user: User, username: string, password: string): void {
+    static login(user, username, password) {
         // TODO: Implement login logic
     }
-
-    static logout(user: User): void {
+    static logout(user) {
         // TODO: Implement logout logic
     }
-
-    validateUsername(): string {
+    validateUsername() {
         // TODO: Implement username validation logic
         return this._username;
     }
-
-    validatePassword(): string {
+    validatePassword() {
         // TODO: Implement password validation logic
         return this._password;
     }
 }
-
-
 window.doPomodoro = () => {
-    console.log("doPomodoro Created")
+    console.log("doPomodoro Created");
     new PomodoroSequence().execute();
 };
-

@@ -26,11 +26,22 @@ function createMainWindow() {
 
 }
 
+let pomodoroRunning = false;
+
 function switchToTimerWindow() {
-    mainWindow.loadFile("views/timer.html").then(() => {
-        mainWindow.webContents.executeJavaScript("window.doPomodoro();");
-    });
+    if (!pomodoroRunning) {
+        pomodoroRunning = true;
+
+        mainWindow.loadFile("views/timer.html").then(() => {
+            console.log("doPomodoro Started")
+            mainWindow.webContents.executeJavaScript("window.doPomodoro();")
+                .finally(() => {
+                    pomodoroRunning = false;
+                });
+        });
+    }
 }
+
 
 app.whenReady().then(() => {
     createMainWindow();
