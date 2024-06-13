@@ -2,28 +2,60 @@
 const { assert } = require('assert');
 class TodoList {
     constructor(title, items) {
-        this.title = title;
-        this.items = items;
+        this._title = title;
+        this._items = items;
     }
     deleteAt(index) {
-        assert(index >= 0 && index < this.items.length, "Index out of Range!");
-        return this.items.filter((_, i) => i !== index);
+        assert(index >= 0 && index < this._items.length, "Index out of Range!");
+        this._items = this._items.filter((_, i) => i !== index);
+    }
+    // Getters and setters
+    get title() {
+        return this._title;
+    }
+    set title(value) {
+        this._title = value;
+    }
+    get items() {
+        return this._items;
+    }
+    set items(value) {
+        this._items = value;
     }
     addItem(item) {
-        this.items.push(item);
+        this._items.push(item);
     }
     deleteItemAtIndex(index) {
         this.deleteAt(index);
     }
     deleteItemAtName(name) {
-        this.deleteAt(this.items.findIndex(item => item.title === name));
+        this.deleteAt(this._items.findIndex(item => item.title === name));
     }
 }
 class ListItem {
     constructor(title, dueDate = null, description = null) {
-        this.title = title;
-        this.dueDate = dueDate;
-        this.description = description;
+        this._title = title;
+        this._dueDate = dueDate;
+        this._description = description;
+    }
+    // Getters and setters
+    get title() {
+        return this._title;
+    }
+    set title(value) {
+        this._title = value;
+    }
+    get dueDate() {
+        return this._dueDate;
+    }
+    set dueDate(value) {
+        this._dueDate = value;
+    }
+    get description() {
+        return this._description;
+    }
+    set description(value) {
+        this._description = value;
     }
 }
 var StageType;
@@ -38,19 +70,22 @@ var StageType;
     StageType[StageType["BreakFour"] = 7] = "BreakFour";
 })(StageType || (StageType = {}));
 ;
-// Class for representing a stage
-// ptype is a StageType, duration is a number value for minutes
 class Stage {
-    constructor(ptype, duration) {
-        this.type = ptype;
-        this.duration = duration;
+    constructor(type, duration) {
+        this._type = type;
+        this._duration = duration;
+    }
+    // Getters
+    get type() {
+        return this._type;
+    }
+    get duration() {
+        return this._duration;
     }
     toString() {
-        return `Stage ${StageType[this.type]}, Duration ${this.duration.toString()}`;
+        return `Stage ${StageType[this._type]}, Duration ${this._duration.toString()}`;
     }
 }
-// Class for representing an entire pomodoro sequence
-// inputs a list of 8 Stage types
 class PomodoroSequence {
     constructor(sequence = null) {
         this.sequence = [];
@@ -102,37 +137,61 @@ class PomodoroSequence {
         runStage(sequence);
     }
 }
+class User {
+    constructor(username, password, todoList = null, history = null, customPomodoros = null) {
+        this._username = username;
+        this._password = password;
+        this._todoList = todoList;
+        this._history = history;
+        this._customPomodoros = customPomodoros;
+    }
+    // Getters and setters
+    get username() {
+        return this._username;
+    }
+    set username(value) {
+        this._username = value;
+    }
+    get password() {
+        return this._password;
+    }
+    set password(value) {
+        this._password = value;
+    }
+    get todoList() {
+        return this._todoList;
+    }
+    set todoList(value) {
+        this._todoList = value;
+    }
+    get history() {
+        return this._history;
+    }
+    set history(value) {
+        this._history = value;
+    }
+    get customPomodoros() {
+        return this._customPomodoros;
+    }
+    set customPomodoros(value) {
+        this._customPomodoros = value;
+    }
+    static login(user, username, password) {
+        // TODO: Implement login logic
+    }
+    static logout(user) {
+        // TODO: Implement logout logic
+    }
+    validateUsername() {
+        // TODO: Implement username validation logic
+        return this._username;
+    }
+    validatePassword() {
+        // TODO: Implement password validation logic
+        return this._password;
+    }
+}
 window.doPomodoro = () => {
     console.log("doPomodoro Created");
     new PomodoroSequence().execute();
 };
-// If we have a login and logout functionality,
-// I think this class is just a singleton at that
-// point, idk if we need to do anything special with it
-class User {
-    constructor(username, password, todo = [], history = null, customPomodoros = null) {
-        this.username = username;
-        this.validateUsername();
-        this.password = password;
-        this.validatePassword();
-        this.TodoList = todo;
-        this.history = history;
-        this.customPomodoros = customPomodoros;
-    }
-    static login(user, username, password) {
-        // TODO
-        // Connect to db or something idk
-    }
-    static logout(user) {
-        // TODO
-        // Disconnect from db lol?
-    }
-    validateUsername() {
-        // TODO
-        return this.username;
-    }
-    validatePassword() {
-        // TODO
-        return this.password;
-    }
-}
