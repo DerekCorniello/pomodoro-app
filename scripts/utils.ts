@@ -1,4 +1,22 @@
 const { assert } = require('assert');
+const sqlite3 = require('sqlite3');
+const db = new sqlite3.Database('database/database.db');
+
+db.serialize(() => {
+    db.run(`CREATE TABLE Users ( 
+            userID INT AUTO_INCREMENT PRIMARY KEY, 
+            Username VARCHAR(255) NOT NULL, 
+            Password VARCHAR(255) NOT NULL 
+    )`);
+    db.run(`INSERT INTO Users (Username, Password) VALUES ('admin', 'admin')`);
+    db.run(`CREATE TABLE Sessions (
+            sessionID INT AUTO_INCREMENT PRIMARY KEY,
+            SessionStartTime DATETIME NOT NULL,
+            SessionEndTime DATETIME NOT NULL,
+            userID INT NOT NULL,
+            FOREIGN KEY (userID) REFERENCES Users(userID)
+    )`);
+});
 
 class TodoList {
     private _title: string;

@@ -12,17 +12,18 @@
     "author": "Binary Brigade",
     "license": "MIT",
     "devDependencies": {
+        "@types/node": "^20.14.9",
         "chai": "^5.1.1",
         "electron": "^30.0.3",
         "mocha": "^10.4.0",
         "spectron": "^19.0.0",
-        "typescript": "^5.4.5",
-        "ts-node": "^10.9.1"
+        "ts-node": "^10.9.1",
+        "typescript": "^5.4.5"
     },
     "dependencies": {
-        "@types/node": "^20.14.2",
         "@types/electron": "^1.6.10",
         "source-map-loader": "^5.0.0",
+        "sqlite3": "^5.1.7",
         "ts-loader": "^9.5.1"
     }
 }
