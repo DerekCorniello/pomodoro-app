@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@types/electron": "^1.6.10",
+        "password-hash": "^1.2.2",
         "source-map-loader": "^5.0.0",
         "sqlite3": "^5.1.7",
         "ts-loader": "^9.5.1"

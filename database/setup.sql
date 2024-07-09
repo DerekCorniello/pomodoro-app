@@ -1,31 +1,28 @@
-CREATE DATABASE electron_app;
-USE electron_app;
-
-CREATE TABLE Users (
-    userID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Users (
+    userID INTEGER PRIMARY KEY,
     Username VARCHAR(255) NOT NULL,
     Password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Sessions (
-    sessionID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Sessions (
+    sessionID INTEGER PRIMARY KEY,
     SessionStartTime DATETIME NOT NULL,
     SessionEndTime DATETIME NOT NULL,
-    userID INT NOT NULL,
+    userID INTEGER NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
-CREATE TABLE TodoList (
-    listID INT AUTO_INCREMENT PRIMARY KEY,
-    userID INT NOT NULL,
+CREATE TABLE IF NOT EXISTS TodoList (
+    listID INTEGER PRIMARY KEY,
+    userID INTEGER NOT NULL,
     ListTitle VARCHAR(255) NOT NULL,
     ListDescription TEXT,
     FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
-CREATE TABLE TodoItem (
-    itemID INT AUTO_INCREMENT PRIMARY KEY,
-    listID INT NOT NULL,
+CREATE TABLE IF NOT EXISTS TodoItem (
+    itemID INTEGER PRIMARY KEY,
+    listID INTEGER NOT NULL,
     TaskTitle VARCHAR(255) NOT NULL,
     TaskDescription TEXT,
     Timestamp DATETIME NOT NULL,
@@ -33,9 +30,9 @@ CREATE TABLE TodoItem (
     FOREIGN KEY (listID) REFERENCES TodoList(listID)
 );
 
-CREATE TABLE UserInfo (
-    userID INT PRIMARY KEY,
-    NumberOfSessions INT NOT NULL,
-    TotalStudyTime INT NOT NULL NULL,
+CREATE TABLE IF NOT EXISTS UserInfo (
+    userID INTEGER PRIMARY KEY,
+    NumberOfSessions INTEGER NOT NULL,
+    TotalStudyTime INTEGER NOT NULL NULL,
     FOREIGN KEY (userID) REFERENCES Users(userID)
 );

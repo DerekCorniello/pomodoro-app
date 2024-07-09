@@ -1,21 +1,52 @@
 "use strict";
 const { assert } = require('assert');
 const sqlite3 = require('sqlite3');
+const passwordHash = require('password-hash');
 const db = new sqlite3.Database('database/database.db');
 db.serialize(() => {
-    db.run(`CREATE TABLE Users ( 
-            userID INT AUTO_INCREMENT PRIMARY KEY, 
-            Username VARCHAR(255) NOT NULL, 
+    db.run(`CREATE TABLE IF NOT EXISTS Users ( 
+            userID INTEGER PRIMARY KEY, 
+            Username VARCHAR(255) NOT NULL UNIQUE, 
             Password VARCHAR(255) NOT NULL 
     )`);
-    db.run(`INSERT INTO Users (Username, Password) VALUES ('admin', 'admin')`);
-    db.run(`CREATE TABLE Sessions (
-            sessionID INT AUTO_INCREMENT PRIMARY KEY,
+    db.run(`CREATE TABLE IF NOT EXISTS Sessions (
+            sessionID INTEGER PRIMARY KEY,
             SessionStartTime DATETIME NOT NULL,
             SessionEndTime DATETIME NOT NULL,
             userID INT NOT NULL,
             FOREIGN KEY (userID) REFERENCES Users(userID)
     )`);
+    db.run(`CREATE TABLE IF NOT EXISTS TodoList (
+            listID INTEGER PRIMARY KEY,
+            userID INTEGER NOT NULL,
+            ListTitle VARCHAR(255) NOT NULL,
+            ListDescription TEXT,
+            FOREIGN KEY (userID) REFERENCES Users(userID)
+    )`);
+    db.run(`CREATE TABLE IF NOT EXISTS TodoItem (
+            itemID INTEGER PRIMARY KEY,
+            listID INTEGER NOT NULL,
+            TaskTitle VARCHAR(255) NOT NULL,
+            TaskDescription TEXT,
+            Timestamp DATETIME NOT NULL,
+            isActive BOOLEAN NOT NULL,
+            FOREIGN KEY (listID) REFERENCES TodoList(listID)
+    )`);
+    db.run(`CREATE TABLE IF NOT EXISTS UserInfo (
+            userID INTEGER PRIMARY KEY,
+            NumberOfSessions INTEGER NOT NULL,
+            TotalStudyTime INTEGER NOT NULL,
+            FOREIGN KEY (userID) REFERENCES Users(userID)
+    )`);
+    /*
+    Example of getting data from the database
+    db.each("SELECT * FROM Users", (err: any, row: any) => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log(row.userID + ": " + row.Username);
+    });
+    */
 });
 class TodoList {
     constructor(title, items) {
@@ -161,12 +192,40 @@ class User {
         this._todoList = todoList;
         this._history = history;
         this._customPomodoros = customPomodoros;
+        db.serialize(() => {
+            db.get(`SELECT * FROM Users WHERE Username = ?`, this._username, (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                }
+                else if (row) {
+                    console.log("User already exists");
+                }
+                else {
+                    var stmt = db.prepare(`INSERT INTO Users (Username, Password) VALUES (?, ?)`);
+                    stmt.run(this._username, passwordHash.generate(this._password), (err) => {
+                        if (err) {
+                            console.error(err.message);
+                        }
+                    });
+                    stmt.finalize();
+                }
+            });
+        });
     }
     // Getters and setters
     get username() {
         return this._username;
     }
     set username(value) {
+        db.serialize(() => {
+            var stmt = db.prepare(`UPDATE Users SET Username = ? WHERE Username = ?`);
+            stmt.run(value, value, (err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+            stmt.finalize();
+        });
         this._username = value;
     }
     get password() {
@@ -208,6 +267,9 @@ class User {
         return this._password;
     }
 }
+var user = new User("nathan", "1234");
+var user2 = new User("nathan", "1234");
+user.username = "nathan2";
 window.doPomodoro = () => {
     console.log("doPomodoro Created");
     new PomodoroSequence().execute();
