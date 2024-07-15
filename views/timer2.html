@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!-- <link rel="stylesheet" href="../styles/timer.css"> -->
+    <link rel="stylesheet" href="../styles/timer.css">
+
+
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="../css/fancybox.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <title>PoMotivate &mdash; Free Photography Website Template by Untree.co</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
+    
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
+
+
+    <div class="site-wrap">
+
+        <div class="site-mobile-menu site-navbar-target">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+        <header class="header-bar d-flex d-lg-block align-items-center site-navbar-target" data-aos="fade-right">
+            <div class="site-logo">
+                <a href="timer.html">PoMotivate</a>
+            </div>
+
+            <div class="d-inline-block d-lg-none ml-md-0 ml-auto py-3" style="position: relative; top: 3px;"><a href="#"
+                    class="site-menu-toggle js-menu-toggle "><span class="icon-menu h3"></span></a></div>
+
+            <div class="main-menu">
+                <ul class="js-clone-nav">
+                    <li><a href="#section-timer" class="nav-link">Timer</a></li>
+                    <li><a href="#section-tasks" class="nav-link">Tasks</a></li>
+                    <!-- <li><a href="#section-history" class="nav-link">History</a></li> -->
+                </ul>
+            </div>
+
+        </header>
+        <main class="main-content">
+
+            <section class="site-section-hero bg-image mb-5" style="background-image: url('../images/hero-min.jpg');"
+                data-stellar-background-ratio="0.5" id="section-timer">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-7 text-center">
+                        <!-- added timer -->
+                        <div id="timer-message">Please select a timer before starting.</div>
+                        <div class="container">
+                            <div class="container timer-block">
+                                <div class="timer">
+                                    <h1>Lets Start Knocking Those Tasks!</h1>
+
+                                    <div class="button-container">
+                                        <button class="button" id="pomodoro-session">Pomodoro</button>
+                                        <button class="button" id="customized-session">Customized Session</button>
+                                        <button class="button" id="short-break">Short Break</button>
+                                        <button class="button" id="long-break">Long break</button>
+                                    </div>
+
+                                    <div id="pomodoro-timer" class="timer-display" data-duration="25.00">
+                                        25:00
+                                    </div>
+
+                                    <div id="short-timer" class="timer-display" data-duration="5.00">
+                                        5:00
+                                    </div>
+
+                                    <div id="long-timer" class="timer-display" data-duration="10.00">
+                                        10:00
+                                    </div>
+                                    <!-- customized timer -->
+                                    <div id="show-customized-timer">
+                                        <div id="customized-timer" class="timer-display customized"
+                                            data-duration="time-custom">
+                                            <h4> Enter Time In Minutes: </h4>
+                                            <input type="text" id="timer-customized-value" class="input-customized"
+                                                id="time-custom" required>
+                                            <button id="timer-customized-button"
+                                                class="button-container-customized">submit</button>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <div id="buttons">
+                                        <button id="start">Start</button>
+                                        <button id="show-customized-timer-button">Reset</button>
+                                        <button id="stop-temp-button">Pause Session</button>
+                                        <button id="stop">End Session</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Above timer -->
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- To do list -->
+            <section id="section-tasks">
+                <div class="to-do-list">
+                    <h2> To Do List </h2>
+                    <h6>in progress</h6>
+
+                    <ul id="tasks">
+
+                    </ul>
+                    <input type="hidden" name="task" id="taskname" placeholder="Add Or Remove Task">
+                    <button >
+            </section>
+            <!-- End to do list   -->
+
+            <div class="container-fluid site-section">
+
+
+                <div class="row justify-content-center">
+                    <div class="col-md-12 text-center py-5">
+                        <p>Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash;
+                            Designed with love by <a href="https://untree.co">Untree.co</a>
+                            <!-- License information: https://untree.co/license/ -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div> <!-- .site-wrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+    <script src="../scripts/timer.js"></script>
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../js/jquery.easing.1.3.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.stellar.min.js"></script>
+    <script src="../js/jquery.countdown.min.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/lozad.min.js"></script>
+
+    <script src="../js/jquery.fancybox.min.js"></script>
+
+    <script src="../js/main.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+</body>
+
+</html>

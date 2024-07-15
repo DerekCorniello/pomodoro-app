@@ -1,0 +1,112 @@
+body {
+  background-color: #1e213f;
+  color: #d7e0ff;
+}
+.container {
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
+}
+.timer-block {
+  background-color: white;
+}
+.timer {
+  display: inline-block;
+  padding: 10px;
+  width: 600px;
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 2em;
+  width: 16ch;
+  margin: 20px auto;
+}
+span {
+  font-size: 0.20em;
+  width: 8ch;
+}
+
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.button {
+  background-color: #2e325a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.input-customized{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.20em;
+  padding: 0.5em;
+  margin-left: 11em;
+}
+.button-container-customized{
+  background-color: #2e325a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 0.20em;
+}
+
+.button:hover {
+  background-color: #f87070;
+}
+.hidden {
+  display: block;
+}
+.timer-display {
+  font-size: 5em;
+  margin-top: 20px;
+  font-weight: bold;
+}
+#buttons {
+  margin-top: 20px;
+}
+#start,
+#stop,
+#show-customized-timer-button,
+#stop-temp-button {
+  background-color: #2e325a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#stop:hover {
+  background-color: tomato;
+}
+#start:hover {
+  background-color: #219a52;
+}
+
+#show-customized-timer-button:hover {
+  background-color: #d7be00d6;
+}
+
+#timer-customized-button:hover {
+  background-color: #f87070;
+}
+#timer-message {
+  color: white;
+  background-color: tomato;
+  display: none;
+  padding: .5em;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 1em;
+}
