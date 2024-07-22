@@ -1,0 +1,38 @@
+CREATE TABLE IF NOT EXISTS Users (
+    userID INTEGER PRIMARY KEY,
+    Username VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Sessions (
+    sessionID INTEGER PRIMARY KEY,
+    SessionStartTime DATETIME NOT NULL,
+    SessionEndTime DATETIME NOT NULL,
+    userID INTEGER NOT NULL,
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE IF NOT EXISTS TodoList (
+    listID INTEGER PRIMARY KEY,
+    userID INTEGER NOT NULL,
+    ListTitle VARCHAR(255) NOT NULL,
+    ListDescription TEXT,
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE IF NOT EXISTS TodoItem (
+    itemID INTEGER PRIMARY KEY,
+    listID INTEGER NOT NULL,
+    TaskTitle VARCHAR(255) NOT NULL,
+    TaskDescription TEXT,
+    Timestamp DATETIME NOT NULL,
+    isActive BOOLEAN NOT NULL,
+    FOREIGN KEY (listID) REFERENCES TodoList(listID)
+);
+
+CREATE TABLE IF NOT EXISTS UserInfo (
+    userID INTEGER PRIMARY KEY,
+    NumberOfSessions INTEGER NOT NULL,
+    TotalStudyTime INTEGER NOT NULL NULL,
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+);
