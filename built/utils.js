@@ -232,6 +232,15 @@ class User {
         return this._password;
     }
     set password(value) {
+        db.serialize(() => {
+            var stmt = db.prepare(`UPDATE Users SET Password = ? WHERE Username = ?`);
+            stmt.run(passwordHash.generate(value), this._username, (err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+            stmt.finalize();
+        });
         this._password = value;
     }
     get todoList() {
@@ -268,8 +277,6 @@ class User {
     }
 }
 var user = new User("nathan", "1234");
-var user2 = new User("nathan", "1234");
-user.username = "nathan2";
 window.doPomodoro = () => {
     console.log("doPomodoro Created");
     new PomodoroSequence().execute();
