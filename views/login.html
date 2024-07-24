@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="../css/fancybox.min.css">
 
     <link rel="stylesheet" href="../css/style.css">
-    <title>PoMotivate &mdash; Free Photography Website Template by Untree.co</title>
+    <title>PoMotivate &mdash;</title>
 
 
 </head>
@@ -54,7 +54,7 @@
             style="background-color:#f59f0e">
             <div class="site-logo">
                 <!-- center it -->
-                <a href="Landingpage.html">PoMotivate</a>
+                <a href="landingpage.html">PoMotivate</a>
             </div>
         </header>
 
@@ -69,13 +69,13 @@
                     <div style="text-align: center;">
                         <!-- a php form is added to check login -->
                         <!-- checklogin.php -->
-                        <form action="#" style="display: inline-block;">
+                        <form action="timer2.html" style="display: inline-block;">
                             <div class="">
 
                                 <div class="col-md-12">
                                     <label class="" for="email"
                                         style="font-family: league spartan; font-weight:600; font-size: 20px;">Email</label>
-                                    <input type="email" id="email" class="form-control"
+                                    <input type="email" id="email" class="form-control" required pattern="^[\w.-]+@[\w-]+(.[\w-]+)*$" placeholder="Your email address" title="Please enter a valid email address"
                                         style="width: 450px; background-color: white;">
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                 <div class="col-md-12">
                                     <label class="" for="subject"
                                         style="font-family: league spartan; font-weight:600; font-size: 20px;">Password</label>
-                                    <input type="password" id="password" class="form-control"
+                                    <input type="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&amp;])[\w!@#$%^&amp;]{8,}$" placeholder="Your password" title="Password must have at least 8 characters with 1 special symbol !@#$%^&amp; 1 number, 1 lowercase, and 1 UPPERCASE" required class="form-control"
                                         style="width: 450px; background-color: white;">
                                 </div>
                             </div>
@@ -143,23 +143,6 @@
                         </div>
                     </div>
                 </section>
-
-
-
-
-
-
-
-
-                <div class="row justify-content-center">
-                    <div class="col-md-12 text-center py-5">
-                        <p>Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash;
-                            Designed with love by <a href="https://untree.co">Untree.co</a>
-                            <!-- License information: https://untree.co/license/ -->
-                        </p>
-                    </div>
-                </div>
             </div>
         </main>
 

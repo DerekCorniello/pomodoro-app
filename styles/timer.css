@@ -32,7 +32,7 @@ span {
   justify-content: center;
 }
 .button {
-  background-color: #2e325a;
+  background-color: #393E46;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -50,7 +50,7 @@ span {
   margin-left: 11em;
 }
 .button-container-customized{
-  background-color: #2e325a;
+  background-color: #393E46;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -61,7 +61,7 @@ span {
 }
 
 .button:hover {
-  background-color: #f87070;
+  background-color: #222831;
 }
 .hidden {
   display: block;
@@ -78,7 +78,7 @@ span {
 #stop,
 #show-customized-timer-button,
 #stop-temp-button {
-  background-color: #2e325a;
+  background-color: #393E46;
   color: #fff;
   border: none;
   border-radius: 5px;

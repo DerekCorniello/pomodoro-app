@@ -51,7 +51,7 @@ document.getElementById("customized-session")
     flagCustomDuration = true;
 });
 
-document.getElementById("short-break")
+document.getElementById("power-pause")
 .addEventListener("click", function () {
     hideAll();
 
@@ -60,7 +60,7 @@ document.getElementById("short-break")
     flagCustomDuration = false;
 });
 
-document.getElementById("long-break")
+document.getElementById("time-out")
 .addEventListener("click", function () {
     hideAll();
 
@@ -128,6 +128,9 @@ function startTimer(timerdisplay) {
             );
 
             alarm.play();
+            let chosenTaskFiltered = filterTask(document.getElementsByClassName("chosenTask")[0].innerHTML);
+            addElementToHistory(chosenTaskFiltered);
+            addTasksToLocalStorageHistory();
 
         } else {
 
@@ -199,7 +202,14 @@ document.getElementById("show-customized-timer-button").addEventListener("click"
     getCustomListener();
 });
 
-window.onload = getTasksFromLocalStorage();
+window.onload = getAllTasksandHistory();
+
+
+function getAllTasksandHistory() {
+    getTasksFromLocalStorage();
+    getTasksFromLocalStorageHistory();
+}
+
 
 document.getElementById("addTask").addEventListener("click", function addNewTask(){
     let task = document.getElementById("newTask").value;
@@ -222,6 +232,17 @@ function addTasksToLocalStorage() {
 
 }
 
+
+let historytasks = null;
+
+function addElementToHistory(completedTask) {  
+    task = document.createTextNode(completedTask);
+    let listElement = document.createElement("li")
+    listElement.appendChild(task);
+    let taskList = document.getElementById("completed-tasks");
+    taskList.appendChild(listElement);
+}
+
 function getTasksFromLocalStorage() {
     let tasksLocalStorage = localStorage.getItem("tasksLocal");
     let tasks = JSON.parse(tasksLocalStorage);
@@ -231,7 +252,14 @@ function getTasksFromLocalStorage() {
         for (let i = 0; i < tasks.length; i++){
             let task = document.createElement("li");
             task.innerHTML = tasks[i];
-            let check = document.createElement("input")
+
+            task.setAttribute("class", "selectTask");
+
+            task.addEventListener("click", function addColor(e){
+                e.target.classList.toggle("chosenTask");
+            })
+
+            let check = document.createElement("input");
             check.setAttribute("type","checkbox");
             check.setAttribute("class", "deleteTask");
             check.addEventListener("click", function deleteTask(e){
@@ -243,3 +271,47 @@ function getTasksFromLocalStorage() {
     }
 }
 
+
+function filterTask(task){
+    if (task.includes("<")) {
+        let filterTask = task.split("<");
+        return filterTask[0];
+        //task.replace("< ...", "");
+    }
+    return task
+}
+
+
+function addTasksToLocalStorageHistory() {
+    let tasks = document.getElementById("completed-tasks");
+    let listTask = tasks.getElementsByTagName("li");
+    let taskList = [];
+    for (let i = 0; i < listTask.length; i++) {
+        taskList.push(listTask[i].innerText);
+    }
+    localStorage.setItem("tasksLocalHistory", JSON.stringify(taskList));
+}
+
+function getTasksFromLocalStorageHistory() {
+    let tasksLocalStorage = localStorage.getItem("tasksLocalHistory");
+    let tasks = JSON.parse(tasksLocalStorage);
+    if(tasks) {
+        let taskList = document.getElementById("completed-tasks");
+        console.log(tasks);
+        for (let i = 0; i < tasks.length; i++){
+            let task = document.createElement("li");
+            task.innerHTML = tasks[i];
+
+            task.setAttribute("class", "selectTask");
+
+            let check = document.createElement("input");
+            check.setAttribute("type","checkbox");
+            check.setAttribute("class", "deleteTask");
+            check.addEventListener("click", function deleteTask(e){
+                e.target.parentElement.remove();
+            });
+            taskList.appendChild(task);
+            task.appendChild(check);
+        }
+    }
+}

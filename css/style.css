@@ -956,3 +956,25 @@ h1, h2, h3, h4, h5,
 .slide-one-item.home-slider:hover .owl-nav, .slide-one-item.home-slider:focus .owl-nav, .slide-one-item.home-slider:active .owl-nav {
   opacity: 10;
   visibility: visible; }
+
+
+.to-do-list-header {
+  margin: 2em;
+}
+
+.to-do-list-create-task {
+  margin: 1em;
+}
+
+.to-do-list-tasks {
+  margin: 1em;
+  list-style-type: none;
+}
+
+.deleteTask {
+  margin-left: 1em;
+}
+
+.chosenTask {
+  background-color: #FFD369;
+}

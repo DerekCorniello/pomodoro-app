@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../styles/timer.css">
 
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://kit.fontawesome.com/c7ebf15da9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -60,6 +61,7 @@
                 <ul class="js-clone-nav">
                     <li><a href="#section-timer" class="nav-link">Timer</a></li>
                     <li><a href="#section-tasks" class="nav-link">Tasks</a></li>
+                    <li><a href="#section-history" class="nav-link">History</a></li>
                     <!-- <li><a href="#section-history" class="nav-link">History</a></li> -->
                 </ul>
             </div>
@@ -67,7 +69,7 @@
         </header>
         <main class="main-content">
 
-            <section class="site-section-hero bg-image mb-5" style="background-image: url('../images/hero-min.jpg');"
+            <section class="site-section-hero bg-image mb-5" style="background-image: url('../images/hero-min2.jpg');"
                 data-stellar-background-ratio="0.5" id="section-timer">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-7 text-center">
@@ -81,8 +83,8 @@
                                     <div class="button-container">
                                         <button class="button" id="pomodoro-session">Pomodoro</button>
                                         <button class="button" id="customized-session">Customized Session</button>
-                                        <button class="button" id="short-break">Short Break</button>
-                                        <button class="button" id="long-break">Long break</button>
+                                        <button class="button" id="power-pause">Power Pause</button>
+                                        <button class="button" id="time-out">Timeout</button>
                                     </div>
 
                                     <div id="pomodoro-timer" class="timer-display" data-duration="25.00">
@@ -126,32 +128,37 @@
 
             <!-- To do list -->
             <section id="section-tasks">
-                <div class="to-do-list">
-                    <h2> To Do List </h2>
-                     <h4>Create Task</h4>
-                    <form action="">
-                        <input name="newTask" placeholder="ex: Morning walk" id="newTask">
-                        <button name="addTask" id="addTask">Add Task</button>
-                    </form>
-                    <ul id="tasks">
-        
-                    </ul>
-            </section>
-            <!-- End to do list   -->
-
-            <div class="container-fluid site-section">
-
-
-                <div class="row justify-content-center">
-                    <div class="col-md-12 text-center py-5">
-                        <p>Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash;
-                            Designed with love by <a href="https://untree.co">Untree.co</a>
-                            <!-- License information: https://untree.co/license/ -->
-                        </p>
+                <div class="container site-section">
+                    <div class="row justify-content-center">
+                        <!-- <div class="col-md-12 text-center py-5"> -->
+                            <div class="to-do-list">
+                                <h2 class="to-do-list-header"> To Do List </h2>
+                                <h4 class="to-do-list-create-task">Create Task</h4>
+                                <form action="">
+                                    <input name="newTask" placeholder="ex: Morning walk" id="newTask">
+                                    <button name="addTask" id="addTask">Add Task</button>
+                                </form>
+                                <ul id="tasks" class="to-do-list-tasks">
+                    
+                                </ul>
+                            </div>
+                        <!-- </div> -->
                     </div>
                 </div>
-            </div>
+            </section>
+            <!-- End to do list   -->
+            <section id="section-history">
+                <div class="container site-section">
+                    <div class="row justify-content-center">
+                        <div class="to-do-list-finished">
+                            <h2 class="to-do-list-header"> Completed Tasks </h2>
+                            <ul id="completed-tasks" class="to-do-list-tasks">
+                                    
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
     </div> <!-- .site-wrap -->
