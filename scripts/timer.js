@@ -198,3 +198,48 @@ document.getElementById("show-customized-timer-button").addEventListener("click"
     document.getElementById("customized-timer").innerHTML = saveCustomForm;
     getCustomListener();
 });
+
+window.onload = getTasksFromLocalStorage();
+
+document.getElementById("addTask").addEventListener("click", function addNewTask(){
+    let task = document.getElementById("newTask").value;
+    task = document.createTextNode(task);
+    let listElement = document.createElement("li")
+    listElement.appendChild(task);
+    let taskList = document.getElementById("tasks");
+    taskList.appendChild(listElement);
+    addTasksToLocalStorage();
+});
+
+function addTasksToLocalStorage() {
+    let tasks = document.getElementById("tasks");
+    let listTask = tasks.getElementsByTagName("li");
+    let taskList = [];
+    for (let i = 0; i < listTask.length; i++) {
+        taskList.push(listTask[i].innerText);
+        }
+    localStorage.setItem("tasksLocal", JSON.stringify(taskList));
+
+}
+
+function getTasksFromLocalStorage() {
+    let tasksLocalStorage = localStorage.getItem("tasksLocal");
+    let tasks = JSON.parse(tasksLocalStorage);
+    if(tasks) {
+        let taskList = document.getElementById("tasks");
+        console.log(tasks);
+        for (let i = 0; i < tasks.length; i++){
+            let task = document.createElement("li");
+            task.innerHTML = tasks[i];
+            let check = document.createElement("input")
+            check.setAttribute("type","checkbox");
+            check.setAttribute("class", "deleteTask");
+            check.addEventListener("click", function deleteTask(e){
+                e.target.parentElement.remove();
+            });
+            taskList.appendChild(task);
+            task.appendChild(check);
+        }
+    }
+}
+
