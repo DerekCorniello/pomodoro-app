@@ -69,13 +69,13 @@
                     <div style="text-align: center;">
                         <!-- a php form is added to check login -->
                         <!-- checklogin.php -->
-                        <form action="timer2.html" style="display: inline-block;">
+                        <form action="timer2.html" method="POST" style="display: inline-block;">
                             <div class="">
                                 <div class="col-md-12">
                                     <label class="" for="fname"
                                         style="font-family: league spartan; font-weight:600; font-size: 20px;">First
                                         Name</label>
-                                    <input type="text" id="fname" class="form-control" required pattern="^(\w\w+)\s(\w+)" placeholder="Your first name" title="Please enter a valid name"
+                                    <input type="text" id="fname" class="form-control" required pattern="[A-Za-z]{3,32}" placeholder="Your first name" title="Please enter a valid name"
                                         style="width: 450px; background-color: white;">
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                     <label class="" for="lname"
                                         style="font-family: league spartan; font-weight:600; font-size: 20px;">Last
                                         Name</label>
-                                    <input type="text" id="lname" class="form-control" required pattern="^(\w\w+)\s(\w+)" placeholder="Your last name" title="Please enter a valid name"
+                                    <input type="text" id="lname" class="form-control" required pattern="[A-Za-z]{3,32}" placeholder="Your last name" title="Please enter a valid name"
                                         style="width: 450px; background-color: white;">
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                         <h3 class=" mt-5">Some Of The Services PoMotivate Offers</h3>
                                         <div class="d-block d-md-flex mt-5">
                                             <div class="mr-md-auto mr-2">
-                                                <ul class="ul-check list-unstyled primary">
+                                                <ul class="primary">
                                                     <li>The App Could Include Features For Setting Specific Times For
                                                         Studying And
                                                         Breaks</li>
